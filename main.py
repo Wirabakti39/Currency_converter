@@ -102,7 +102,7 @@ def convert():
         except ValueError:
             messagebox.showwarning('Warning!', 'Masukan jumlah uang anda !')
         except:
-            messagebox.showwarning('Ada Kesalahan', 'Aplikasi ini membutuhkan saluran internet,\nKarena data nya di proses secara real-time.')
+            messagebox.showwarning('Terdapat Masalah!', 'Hal yg harus diperhatikan :\n1. koneksi internet anda\n2. mata uang yg anda masukan.\n\nLihat menu "help" untuk melihat singkatan mata uang\nyang anda butuhkan.')
 
 
 def clear():
