@@ -9,7 +9,11 @@ from dataCurrency import idCurrency
 root = Tk()
 root.title('DwB App / Currency Converter')
 #root.iconbitmap('c:/gui/codemy.ico')
-root.geometry("500x670")
+root.geometry("500x680")
+
+#ganti logo app
+logo = PhotoImage(file="logoTukar.png")
+root.iconphoto(True, logo)
 
 # Create Tabs
 my_notebook = ttk.Notebook(root)
@@ -32,6 +36,20 @@ my_notebook.add(helper_frame, text="Help")
 #######################
 
 
+def tukar():
+    lepas()
+    beforeMoneyFrom = home_entry.get().upper()
+    BeforeMoneyTo = conversion_entry.get().upper()
+
+    home_entry.delete(0, END)
+    conversion_entry.delete(0, END)
+
+    afterMoneyFrom = BeforeMoneyTo
+    afterMoneyTo = beforeMoneyFrom
+
+    home_entry.insert(0, afterMoneyFrom)
+    conversion_entry.insert(0, afterMoneyTo)
+
 def tetapkan():
     if not home_entry.get() or not conversion_entry.get() :
         messagebox.showwarning("Warning!", "Harus mengisi kedua inputan di atas !")
@@ -53,17 +71,21 @@ def lepas():
 
 # Home Currency labelFrame
 home = LabelFrame(currency_frame, text=" Mata Uang Kamu ", font=("Times New Roman", 14))
-home.pack(pady=20)
+home.pack(pady=16)
 # Home currency entry box
 home_entry = Entry(home, font=("Engravers MT", 10))
-home_entry.pack(pady=10, padx=10)
+home_entry.pack(pady=15, padx=10)
+
+tuker_img = PhotoImage(file="logoTukar.png")
+tukerButton = Button(currency_frame, image=tuker_img, command=tukar)
+tukerButton.pack(pady=5)
 
 # Conversion Currency labelFrame
 conversion = LabelFrame(currency_frame, text="Mata Uang Tujuan", font=("Times New Roman", 14))
-conversion.pack(pady=20)
+conversion.pack(pady=12)
 # Convert_To Entry box
 conversion_entry = Entry(conversion, font=("Engravers MT", 10))
-conversion_entry.pack(pady=10, padx=10)
+conversion_entry.pack(pady=15, padx=10)
 
 # Button Frame
 button_frame = Frame(currency_frame)
