@@ -2,7 +2,8 @@
 1. Tampilan menu Currencies nya :
 
 
-![menu_currencies](https://user-images.githubusercontent.com/94775622/170226534-726f73a7-d188-4100-b23a-828e51a11866.png)
+![tampilan-menu-currencies](https://user-images.githubusercontent.com/94775622/170307051-5b2faeba-767c-475f-a2e3-627a97ab1519.png)
+
 
 2. Tampilan menu Helper nya :
 
