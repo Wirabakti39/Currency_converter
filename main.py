@@ -1,21 +1,24 @@
+from cProfile import label
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
 from forex_python.converter import CurrencyRates
 
+from dataCurrency import idCurrency
+
 
 root = Tk()
 root.title('DwB App / Currency Converter')
 #root.iconbitmap('c:/gui/codemy.ico')
-root.geometry("500x650")
+root.geometry("500x670")
 
 # Create Tabs
 my_notebook = ttk.Notebook(root)
 my_notebook.pack(pady=5)
 
 # Create Two Frames
-currency_frame = Frame(my_notebook, width=480, height=615)
-helper_frame = Frame(my_notebook, width=480, height=480)
+currency_frame = Frame(my_notebook, width=480, height=630)
+helper_frame = Frame(my_notebook, width=480, height=630)
 
 currency_frame.pack(fill="both", expand=1)
 helper_frame.pack(fill="both", expand=1)
@@ -74,7 +77,7 @@ lepas_button.grid(row=0, column=1, padx=10)
 
 
 #######################
-# CONVERSION STUFF
+# CONVERSION STUFF 
 #######################
 
 
@@ -119,6 +122,7 @@ amount_entry.pack(pady=10, padx=10)
 
 # Convert Button
 convert_button = Button(label_amount, text="Convert!", command=convert)
+convert_button.config(font=("Verdana Bold Italic", 12))
 convert_button.pack(pady=20)
 
 # Equals Frame
@@ -135,6 +139,62 @@ clear_button.pack(pady=3)
 # Fake Label for spacing
 spacer = Label(currency_frame, text="")
 spacer.pack(pady=1.5)
+
+
+#######################
+# HELP STUFF 
+#######################
+
+
+header = Label(helper_frame,text="Have Some Problem?", font=("Stencil", 15))
+header.pack(pady=15)
+
+contact = Frame(helper_frame)
+contact.pack(pady=5)
+me = Label(contact, text="Contact me at instagram :", font=("Freestyle Script", 15))
+me.grid(row=0,column=0)
+ig = Label(contact, text=" @mngdms_22", font=("Harrington", 14))
+ig.grid(row=0,column=1)
+
+currHelp = Label(helper_frame,text="~ List of Currency", font=("Elephant Italic", 14))
+currHelp.pack(pady=20, anchor="nw")
+
+##################################
+
+main_frame = Frame(helper_frame)
+main_frame.pack(fill=BOTH, expand=1)
+
+my_canvas = Canvas(main_frame)
+my_canvas.pack(side=LEFT, fill=BOTH, expand=1)
+
+
+my_scroll = ttk.Scrollbar(main_frame, orient=VERTICAL, command=my_canvas.yview)
+my_scroll.pack(side=RIGHT, fill=Y)
+
+
+my_canvas.configure(yscrollcommand=my_scroll.set)
+my_canvas.bind('<Configure>', lambda e: my_canvas.configure(scrollregion=my_canvas.bbox("all")))
+# Gulir pake Mouse
+def on_mouse_wheel(event):
+    my_canvas.yview_scroll(-1 * int((event.delta / 50)), "units")
+# Gulir pake Mouse
+my_canvas.bind_all("<MouseWheel>", on_mouse_wheel) 
+
+
+second_frame = Frame(my_canvas)
+
+
+my_canvas.create_window((0,0), window=second_frame, anchor="n")
+
+
+for k in idCurrency.keys():
+    Label(second_frame,text=f"{k}\t=\t{idCurrency[k]} ", font=("Stika Banner Regular", 14)).pack(pady=2, anchor="nw")
+
+
+# Fake Label for spacing
+spacer = Label(helper_frame, text="")
+spacer.pack(pady=2.5)
+
 
 
 root.mainloop()
